@@ -1,0 +1,156 @@
+/*popup_window*/
+
+.popup_window {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.Dialog_overlay {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.Dialog_content {
+    position: relative;
+    font-family: sans-serif;
+    z-index: 13;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ECE9E0;
+    text-align: center;
+    border-radius: 10px;
+    height: 60%;
+    width: 50%;
+    min-width: 720px;
+    min-height: 500px;
+    box-shadow: 0 4px 16px #dddddd;
+    -webkit-user-select: none; /*запрет выделения текста*/
+    border: solid 2px #89867d;
+
+
+
+}
+
+.Dialog_header {
+
+    background-color: #c4c1b8;
+    width: 100%;
+    height: 5%;
+    justify-content: left;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+
+}
+
+.Dialog_body {
+    padding: 20px;
+    font-size: 15px;
+    color: #4a4a4a;
+    word-wrap: break-word;
+    word-break: break-all;
+    font-weight: 500;
+
+}
+
+.Dialog_footer {
+    position: absolute;
+    align-content: center;
+    justify-content: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    bottom: 10px;
+    line-height: 42px;
+    font-size: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    width: 100%;
+    height: 10%;
+}
+
+.material-icons {
+    position: absolute;
+    top: 4px;
+    right: 11px;
+    cursor: pointer;
+}
+
+.material-icons:active {
+    top: 5px;
+    right: 10px;
+}
+
+.modal_header_text {
+    position: absolute;
+    top: 5px;
+    left: 12px;
+    font-weight: bold;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.modal_button_1, .modal_button_2 {
+    display: block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #9d9d9d;
+    outline: none; /*убираем выделение кнопок при клике мыши*/
+    cursor: pointer;
+}
+
+
+.modal_button_1_container {
+    position: absolute;
+    left: 120px;
+    width: 90px;
+    height: 40px;
+}
+
+.modal_button_2_container {
+    position: absolute;
+    right: 120px;
+    width: 90px;
+    height: 40px;
+}
+
+.modal_button_1:hover, .modal_button_2:hover {
+    background-color: #64625d;
+
+}
+
+.modal_button_1:active, .modal_button_2:active { /*при нажатии на кнопку - кнопка смещается*/
+    margin-top: 1px;
+    margin-left: 1px;
+}
+
+.info_block {
+    /*margin-left: 70px;*/
+    /*margin-top: -5px;*/
+    letter-spacing: 0;
+    font-size: 13px;
+    font-weight: bold;
+    color: #e01d1d;
+    /*word-break: break-word;*/
+}
+
+.checkbox_and_error_info_block {
+    /*display: flex;*/
+    width: 100%;
+    height: 30px;
+}
+
+.active_label {
+    width: 70px;
+    top: 25px;
+}

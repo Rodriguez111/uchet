@@ -1,13 +1,16 @@
 package uchet.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "positions")
-public class Position {
+public class Position implements Cloneable, CloneableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,15 +23,22 @@ public class Position {
     @Column(name = "position_description")
     private String positionDescription;
 
-    @ManyToMany
-    @JoinTable(name = "positions_paths",
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "positions_permissions",
             joinColumns = {@JoinColumn(name = "position_id")},
-            inverseJoinColumns = {@JoinColumn(name = "paths_id")}
+            inverseJoinColumns = {@JoinColumn(name = "permission_id")}
     )
-    private Set<Path> paths = new HashSet<>();
+    private List<Permission> permissions = new ArrayList<>();
 
     public Position() {
     }
+
+//    public Position(String position, String positionDescription, List<Permission> permissions) {
+//        this.position = position;
+//        this.positionDescription = positionDescription;
+//        this.permissions = permissions;
+//    }
 
     public int getId() {
         return id;
@@ -37,6 +47,7 @@ public class Position {
     public void setId(int id) {
         this.id = id;
     }
+
 
     public String getPosition() {
         return position;
@@ -54,25 +65,60 @@ public class Position {
         this.positionDescription = positionDescription;
     }
 
-    public Set<Path> getPaths() {
-        return paths;
+    public List<Permission> getPermissions() {
+        return permissions;
     }
 
-    public void setPaths(Set<Path> paths) {
-        this.paths = paths;
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Position position1 = (Position) o;
-        return Objects.equals(position, position1.position) &&
-                Objects.equals(positionDescription, position1.positionDescription);
+        boolean result = true;
+        if (this == o) {
+            result = true;
+        } else if (o == null || getClass() != o.getClass()) {
+            result = false;
+        } else {
+            Position position1 = (Position) o;
+            if (!Objects.equals(position, position1.position)) {
+                result = false;
+            } else if (!Objects.equals(positionDescription, position1.positionDescription)) {
+                result = false;
+            } else {
+                if (permissions.size() != position1.permissions.size()) {
+                    result = false;
+                } else {
+                    permissions.sort(Comparator.comparing(Permission::getPermission));
+                    position1.permissions.sort(Comparator.comparing(Permission::getPermission));
+
+                    for (int i = 0; i < permissions.size(); i++) {
+                        if (!permissions.get(i).equals(position1.permissions.get(i))) {
+                            result = false;
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+        return  result;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(position, positionDescription);
+        return Objects.hash(position, positionDescription, permissions);
+    }
+
+    @Override
+    public Object cloneEntity() {
+        Position position = null;
+        try {
+            position = (Position) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return position;
     }
 }

@@ -1,0 +1,159 @@
+body {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.mainContainer {
+    margin: auto;
+    min-width: 800px;
+    cursor: default;
+}
+
+#info_container {
+    position: relative;
+    width: 100%;
+    min-width: 1000px;
+    margin: -5px auto 5px;
+    background: #c7c4bb;
+    border-radius: 5px;
+    height: 26px;
+    text-align: center;
+}
+
+.page_title_container {
+    position: relative;
+    top: 4px;
+}
+
+.page_title {
+    font-family: 'san-francisco-bold';
+    font-size: 18px;
+    text-transform: uppercase; /*Все буквы меню заглавные*/
+    -webkit-user-select: none; /*запрет выделения текста*/
+}
+
+.arrow_icon_neutral {
+    position: absolute;
+    right: 3px;
+    /*margin-left: 5px;*/
+
+}
+
+.arrow_icon_down {
+    position: absolute;
+    right: 3px;
+    color: #e01d1d;
+}
+
+.arrow_icon_up {
+    position: absolute;
+    right: 3px;
+    color: #50a526;
+}
+
+a {
+    position: relative;
+}
+
+
+
+.table_container {
+    overflow: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border: 5px groove #c4c1b8;
+    border-radius: 15px;
+    padding: 2px;
+}
+
+.table_header_div {
+    width: 2700px;
+}
+
+.table_body_div {
+    width: 2715px;
+    max-height: 77vh; /*Максимальная высота блока 77% от высоты экрана*/
+    overflow: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.table_header {
+    width: 2700px;
+    text-align: center;
+    font-family: Oswald;
+    font-size: 14px;
+
+    min-width: 1000px;
+
+    border-collapse: separate;
+    border-spacing: 1px;
+    background: #ece9e0;
+    color: #000000;
+    border-top: 5px groove #c4c1b8;
+    border-left: 5px groove #c4c1b8;
+    border-right: 5px groove #c4c1b8;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.table_body {
+    width: 2700px;
+    min-width: 1000px;
+    border-collapse: separate;
+    border-spacing: 1px;
+    background: #ece9e0;
+    color: #000000;
+    border-left: 5px groove #c4c1b8;
+    border-right: 5px groove #c4c1b8;
+    text-align: left;
+
+    padding-left: 2px;
+
+}
+
+.table_footer {
+    width: 2700px;
+    min-width: 1000px;
+    height: 30px;
+    border-collapse: separate;
+    border-spacing: 1px;
+    background: #ece9e0;
+    color: #000000;
+    border-top: 2px solid #7e7e7e;;
+    border-left: 5px groove #c4c1b8;
+    border-right: 5px groove #c4c1b8;
+    border-bottom: 5px groove #c4c1b8;
+
+    padding-left: 2px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: -0.4px;
+
+}
+
+
+.main_table_td {
+    background-color: #c4c1b8;
+    padding-left: 7px;
+    vertical-align: middle;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.footer_td {
+    background-color: #aeaba2;
+    vertical-align: middle;
+    font-family: "Arial";
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 7px;
+}
+
+.table_body .main_table_tr:hover > .main_table_td { /*При наведении на строку меняется цвет фона дочерних элементоу, то есть ячеек*/
+    background-color: #a29f96; /* Цвет фона при наведении */
+}

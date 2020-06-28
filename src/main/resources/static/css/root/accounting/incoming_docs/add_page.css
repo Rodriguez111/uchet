@@ -1,0 +1,134 @@
+body {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.mainContainer {
+    margin: auto;
+    min-width: 800px;
+    /*background-color: aquamarine;*/
+}
+
+
+
+#info_container {
+    position: relative;
+    width: 90%;
+    min-width: 1000px;
+    margin: -5px auto 5px;
+    background: #c7c4bb;
+    border-radius: 5px;
+    height: 26px;
+    text-align: center;
+}
+
+.page_title_container {
+    position: relative;
+    top: 4px;
+}
+
+.page_title {
+    font-family: 'san-francisco-bold';
+    font-size: 18px;
+    text-transform: uppercase; /*Все буквы меню заглавные*/
+    -webkit-user-select: none; /*запрет выделения текста*/
+}
+
+#create_button {
+    position: absolute;
+    left: 60px;
+    top: 3px;
+    border-radius: 3px;
+    outline: none;
+}
+
+a {
+    position: relative;
+}
+
+.documentField {
+    width: 90%;
+    min-width: 1000px;
+    height: 60%;
+    min-height: 500px;
+    margin: auto;
+    border: 5px groove #c4c1b8;
+    border-radius: 10px;
+    background: #ece9e0;
+
+}
+
+.block_1 {
+    display: flex; /*Выстраиваем в ряд*/
+    margin: 7px 10px -15px;
+
+}
+.block_2 {
+    display: flex; /*Выстраиваем в ряд*/
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: -5px;
+}
+
+.block_2_title {
+    width: 80%;
+    font-family: 'san-francisco-heavy';
+    font-size: 17px;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+.block_2_title_name{
+    font-family: 'san-francisco-bold';
+    font-size: 15px;
+}
+
+.type_selector_form_group {
+    position: relative;
+    margin: 10px;
+    text-align: center;
+}
+
+.type_selector_form_label {
+    position: absolute;
+    font-size: 12px;
+    font-weight: bold;
+    left: 10px;
+    top: -15px;
+    color: #000000;
+}
+
+.type_selector {
+    width: 20%;
+}
+
+
+
+.block_3 {
+    margin: 10px;
+}
+
+
+.block_4 {
+    display: flex; /*Выстраиваем в ряд*/
+    horiz-align: center;
+    margin: 10px;
+    height: 30px;
+
+}
+
+.button_1_container, .button_2_container {
+    margin: auto;
+}
+
+.info_container {
+    width: 60%;
+    font-size: 14px;
+    font-weight: bold;
+    color: #e01d1d;
+    text-align: center;
+}
+
+.add_button {
+    margin-top: 15px;
+}
+

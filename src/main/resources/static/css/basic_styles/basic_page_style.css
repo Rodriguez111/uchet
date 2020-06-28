@@ -1,0 +1,136 @@
+body {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.mainContainer {
+    margin: auto;
+    min-width: 800px;
+    cursor: default;
+}
+
+.mainTable {
+    table-layout:auto; /*Ширина столбцов по содержимому*/
+    margin: auto;
+    width: 100%;
+    min-width: 1000px;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 1px;
+    background: #ece9e0;
+    color: #000000;
+    /*border: 1px solid #c4c1b8;*/
+    border: 5px groove #c4c1b8;
+    border-radius: 10px;
+    /*height: 100%;*/
+}
+
+#info_container {
+    position: relative;
+    width: 100%;
+    min-width: 1000px;
+    margin: -5px auto 5px;
+    background: #c7c4bb;
+    border-radius: 5px;
+    height: 26px;
+    text-align: center;
+}
+
+.page_title_container {
+    position: relative;
+    top: 4px;
+}
+
+.page_title {
+    font-family: 'san-francisco-bold';
+    font-size: 18px;
+    text-transform: uppercase; /*Все буквы меню заглавные*/
+    -webkit-user-select: none; /*запрет выделения текста*/
+}
+
+.main_table_thead, .main_table_tbody .main_table_tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;/* even columns width , fix width of table too*/
+}
+
+.main_table_td {
+    background-color: #c4c1b8;
+    padding-left: 7px;
+    vertical-align: middle;
+}
+
+.mainTable .main_table_tbody .main_table_tr:hover > .main_table_td { /*При наведении на строку меняется цвет фона дочерних элементоу, то есть ячеек*/
+    background-color: #a29f96; /* Цвет фона при наведении */
+
+}
+
+.main_table_tbody { /*Тело таблицы, настраиваем отображение блоком, с вертикальной полосой прокрутки*/
+    display:block; /*Отображать блоком*/
+    min-height: 80px; /*Минимальная высота блока*/
+    max-height: 77vh; /*Максимальная высота блока 77% от высоты экрана*/
+    overflow:auto;
+    overflow-x: hidden; /*При выходе за границы по оси Х - прятать*/
+    overflow-y: scroll; /*При выходе за границы по оси Y - скролл*/
+}
+
+.main_table_thead { /*Задаем размер полосы прокрутки*/
+    width: calc( 100% - 1.2em );/* scrollbar is average 1em/16px width, remove it from thead width */
+    text-align: center;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: -0.4px;
+}
+
+
+#create_button {
+    position: absolute;
+    left: 60px;
+    top: 3px;
+    border-radius: 3px;
+    outline: none;
+}
+
+#global_filter_button {
+    position: absolute;
+    right: 60px;
+    top: 3px;
+    border-radius: 3px;
+    outline: none;
+}
+
+.arrow_icon_neutral {
+    position: absolute;
+    right: 3px;
+    /*margin-left: 5px;*/
+
+}
+
+.arrow_icon_down {
+    position: absolute;
+    right: 3px;
+    color: #e01d1d;
+}
+
+.arrow_icon_up {
+    position: absolute;
+    right: 3px;
+    color: #50a526;
+}
+
+a {
+    position: relative;
+}
+
+.new-footer {
+    display:table;
+    width: calc( 100% - 1.2em );/* scrollbar is average 1em/16px width, remove it from thead width */
+    font-family: "Arial Black";
+    text-align: center;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: -0.4px;
+}

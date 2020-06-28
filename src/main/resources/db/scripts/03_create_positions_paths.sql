@@ -1,8 +1,0 @@
-CREATE TABLE IF NOT EXISTS positions_paths
-(
-    id      INTEGER PRIMARY KEY AUTOINCREMENT,
-    position_id INTEGER NOT NULL,
-    path_id INTEGER NOT NULL,
-    FOREIGN KEY (position_id) REFERENCES positions (id) ON DELETE RESTRICT,
-    FOREIGN KEY (path_id) REFERENCES paths (id) ON DELETE RESTRICT
-);

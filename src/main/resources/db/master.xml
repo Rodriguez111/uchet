@@ -5,13 +5,10 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    <include file="scripts/01_create_positions.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/02_create_paths.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/03_create_positions_paths.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/04_create_positions_users.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/10_create_users.sql" relativeToChangelogFile="true"/>
+
+    <include file="scriptsMysql/01_create_tables.sql" relativeToChangelogFile="true"/>
+    <include file="scriptsMysql/02_insert_data_to_tables.sql" relativeToChangelogFile="true"/>
+
 
         </databaseChangeLog>
-
-
 

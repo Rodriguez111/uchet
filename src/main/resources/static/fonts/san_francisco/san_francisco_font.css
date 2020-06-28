@@ -1,0 +1,85 @@
+@font-face {
+    font-family: 'san-francisco-thin';
+    src: local('san francisco'),
+    url('SFUIDisplay-Thin.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-ultralight';
+    src: local('san francisco'),
+    url('SFUIDisplay-Ultralight.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'san-francisco-bold';
+    src: local('san francisco'),
+    url('SFUIText-Bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-bold-italic';
+    rc: local('san francisco'),
+    url('SFUIText-Italic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-heavy';
+    src: local('san francisco'),
+    url('SFUIText-Heavy.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-heavy-italic';
+    src: local('san francisco'),
+    url('SFUIText-HeavyItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-italic';
+    src: local('san francisco'),
+    url('SFUIText-Italic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-light';
+    src: local('san francisco'),
+    url('SFUIText-Light.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-light-italic';
+    src: local('san francisco'),
+    url('SFUIText-LightItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-medium';
+    src: local('san francisco'),
+    url('SFUIText-Medium.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-medium-italic';
+    src: local('san francisco'),
+    url('SFUIText-MediumItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-regular';
+    src: local('san francisco'),
+    url('SFUIText-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-semibold';
+    src: local('san francisco'),
+    url('SFUIText-Semibold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'san-francisco-semibold-italic';
+    src: local('san francisco'),
+    url('SFUIText-SemiboldItalic.woff') format('woff');
+}
+

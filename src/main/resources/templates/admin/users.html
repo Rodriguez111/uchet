@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<meta http-equiv="Cache-Control" content="no-cache" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/css/basic_styles/main_menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/basic_page_style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/filter_panel.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/create_update_popup.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/create_update_form.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/delete_popup.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/root/users_columns.css}"/>
+
+    <link rel="stylesheet" th:href="@{/fonts/fontsawesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/materialicons/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/cuprum/cuprum.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/san_francisco/san_francisco_font.css}"/>
+
+    <script type="text/javascript" th:src="@{/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vue-resource.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lodash_full.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/admin/users/app_table_header_users.js}"></script>
+    <script type="text/javascript" th:src="@{/js/admin/users/user_popups.js}"></script>
+    <script type="text/javascript" th:src="@{/js/admin/users/app_filter_users.js}"></script>
+
+    <script th:inline="javascript">
+        var authData = [[${authData}]];
+        var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    </script>
+
+
+    <title>Пользователи</title>
+</head>
+<body>
+
+
+<div id="main-menu-app">
+
+</div>
+
+
+
+
+<div id="users-app">
+
+    <div class="first_separator">
+        <hr>
+    </div>
+
+
+    <div class="mainContainer">
+        <div id="info_container">
+            <div class="page_title_container">
+                <div class="fa fa-group"><span class="page_title"> Пользователи</span></div>
+            </div>
+            <div id="createButtonScope">
+                <button id="create_button" @click="showAddPopup">Новый</button>
+            </div>
+        </div>
+
+        <table class="mainTable">
+            <thead class="main_table_thead">
+            <tr class="main_table_tr" is="app-table-header-users">
+            </tr>
+            <tr class="main_table_tr" is="app-filter-users"></tr>
+            </thead>
+            <tbody class="main_table_tbody" id="tableBody">
+            <tr class="main_table_tr" is="app-users" :table-update-toggle="toggleForUpdate"
+                :list-of-users="listOfUsers">
+            </tr>
+            </tbody>
+            <tfoot class="new-footer">
+            <tr class="main_table_tr">
+                <th class="column_1">Итого: {{countOfRows}}</th>
+                <th class="column_2"></th>
+                <th class="column_3"></th>
+                <th class="column_4"></th>
+                <th class="column_5"></th>
+                <th class="column_6"></th>
+                <th class="column_7"></th>
+                <th class="column_8"></th>
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+
+
+    <create-user-popup
+            header_title="Создание нового пользователя"
+            button_1_name="Создать"
+            button_2_name="Отмена"
+            v-if="isAddPopupVisible"
+            @close_add_popup="closeAddPopupWindow"
+            @validate_and_add="validateAndAdd">
+
+        <div class="create_update_form">
+            <h1 class="form_title">Новый пользователь</h1>
+            <div class="form_group">
+                <input type="text" v-model="newObject.login" :class="{'input-error-style': loginErrorEnable}"
+                       class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Логин:</label>
+            </div>
+            <div class="form_group">
+                <input type="password" v-model="newObject.password" :class="{'input-error-style': passErrorEnable}"
+                       class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Пароль:</label>
+            </div>
+            <div class="form_group">
+                <input type="password" v-model="newObject.repassword" :class="{'input-error-style': repassErrorEnable}"
+                       class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Подтверждение пароля:</label>
+            </div>
+            <div class="form_group">
+                <input type="text" v-model="newObject.surname" :class="{'input-error-style': surnameErrorEnable}"
+                       class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Фамилия:</label>
+            </div>
+            <div class="form_group">
+                <input type="text" v-model="newObject.name" :class="{'input-error-style': nameErrorEnable}"
+                       class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Имя:</label>
+            </div>
+            <div class="form_group">
+                <app-positions-for-add :list-of-positions="listOfPositions"
+                                       v-bind:positions-error-enable="positionsErrorEnable"></app-positions-for-add>
+                <label class="form_label">Должность:</label>
+            </div>
+            <div class="checkbox_and_error_info_block">
+                <div class="form_group">
+                    <input class="isactive_input" v-model="newObject.active" type="checkbox" value="true" checked>
+                    <br>
+                    <label class="form_label active_label">Активен:</label>
+                </div>
+                <div class="info_block">
+                    <p v-if="error_message !== ''">{{error_message}}</p>
+                </div>
+            </div>
+        </div>
+    </create-user-popup>
+
+
+    <update-user-popup header_title="Изменение данных пользователя"
+                       button_1_name="Изменить"
+                       button_2_name="Отмена"
+                       v-if="isUpdatePopupVisible"
+                       @close_update_popup="closeUpdatePopupWindow"
+                       @validate_and_update="validateAndUpdate">
+
+        <div class="create_update_form">
+            <h1 class="form_title">Изменение профиля</h1>
+            <div class="form_group">
+                <input :disabled="editableLoginField" type="text" v-model="newObject.login"
+                       :class="{'input-error-style': loginErrorEnable}" class="form_input">
+                <br>
+                <label class="form_label">Логин:</label>
+            </div>
+            <div class="form_group">
+                <input type="password" v-model="newObject.password" :class="{'input-error-style': passErrorEnable}"
+                       class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Пароль:</label>
+            </div>
+            <div class="form_group">
+                <input type="password" v-model="newObject.repassword"
+                       :class="{'input-error-style': repassErrorEnable}" class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Подтверждение пароля:</label>
+            </div>
+            <div class="form_group">
+                <input type="text" v-model="newObject.surname" :class="{'input-error-style': surnameErrorEnable}"
+                       class="form_input">
+                <br>
+                <label class="form_label">Фамилия:</label>
+            </div>
+            <div class="form_group">
+                <input type="text" v-model="newObject.name" :class="{'input-error-style': nameErrorEnable}"
+                       class="form_input">
+                <br>
+                <label class="form_label">Имя:</label>
+            </div>
+            <div class="form_group">
+
+                <app-positions-for-update :list-of-positions="listOfPositions"
+                                          :selected-position="newObject.position.position"></app-positions-for-update>
+                <label class="selector_label">Должность:</label>
+            </div>
+
+            <div class="checkbox_and_error_info_block">
+                <div class="form_group">
+                    <input class="isactive_input" v-model="newObject.active" type="checkbox" value="true" checked>
+                    <br>
+                    <label class="form_label active_label">Активен:</label>
+                </div>
+                <div class="info_block">
+                    <p v-if="error_message !== ''">{{error_message}}</p>
+                </div>
+            </div>
+        </div>
+    </update-user-popup>
+
+
+    <delete-user-popup header_title="Удаление пользователя"
+                       button_1_name="Удалить"
+                       button_2_name="Отмена"
+                       :user_to_delete="newObject"
+                       :error_message="error_message"
+                       v-if="isDeletePopupVisible"
+                       @close_delete_popup="closeDeletePopupWindow"
+                       @validate_and_delete="sendDataForDelete">
+    </delete-user-popup>
+
+
+</div>
+
+<script type="text/javascript" th:src="@{/js/admin/users/users.js}"></script>
+<script type="text/javascript" th:src="@{/js/root/main/main_menu.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+.global_filter_form {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    font-family: sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.form_input {
+    font-family: sans-serif;
+    letter-spacing: 0.6px;
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 3px;
+
+}
+.form_title {
+    text-align: center;
+    margin: 0 0 20px 0;
+    font-weight: normal;
+}
+
+.container_1 {
+    width: 100%;
+    text-align: justify;
+    text-align-last: justify;
+    margin-top: 30px;
+}
+
+.date_from_block, .date_to_block {
+    display: inline-block;
+    width: 150px;
+}
+
+.container_2 {
+    width: 100%;
+    text-align: justify;
+    text-align-last: justify;
+    margin-top: 30px;
+}
+
+.doc_number_block {
+    display: inline-block;
+    width: 300px;
+}
+
+.doc_number_input {
+    display: inline-block;
+    width: 100px;
+}
+
+.user_select_block {
+    display: inline-block;
+    width: 300px;
+}
+
+.user_selector {
+    display: inline-block;
+    width: 300px;
+}
+
+.container_3 {
+    width: 100%;
+    text-align: justify;
+    text-align-last: justify;
+    margin-top: 30px;
+}
+
+.contractor_block {
+    display: inline-block;
+    width: 300px;
+}
+.doc_type_block {
+    display: inline-block;
+    width: 300px;
+}
+
+.contractor_selector, .doc_type_selector, .user_selector {
+    overflow-y: scroll;
+    border: solid 2px #89867d;
+    border-radius: 5px;
+    width: 300px;
+    height: 95px;
+    text-align-last: left;
+}
+
+.form_label {
+    position: absolute;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: -20px;
+    color: #000000;
+}
+
+.form_input {
+    width: 100%;
+    outline: 0;
+    border-left: 2px solid #96938a;
+    border-top: 2px solid #96938a;
+    border-right: 2px solid #f7f4ea;
+    border-bottom: 2px solid #f7f4ea;
+    border-radius: 4px;
+}
+.form_input:focus {
+    border-left: 2px solid #57544c;
+    border-top: 2px solid #57544c;
+    border-right: 2px solid #f7f4ea;
+    border-bottom: 2px solid #f7f4ea;
+    background-color: #e9ffe7;
+}

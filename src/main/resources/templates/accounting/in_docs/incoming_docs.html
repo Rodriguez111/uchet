@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<meta http-equiv="Cache-Control" content="no-cache" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      >
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/basic_styles/main_menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/basic_page_style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/filter_panel.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/create_update_popup.css}"/>
+    <link rel="stylesheet" th:href="@{/css/root/accounting/incoming_docs/global_filter_form.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/root/accounting/incoming_docs/incoming_docs_columns.css}"/>
+
+    <link rel="stylesheet" th:href="@{/fonts/fontsawesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/materialicons/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/cuprum/cuprum.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/san_francisco/san_francisco_font.css}"/>
+
+
+    <script type="text/javascript" th:src="@{/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vue-resource.min.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/root/accounting/incoming_docs/app_table_header_indocs.js}"></script>
+    <script type="text/javascript" th:src="@{/js/root/accounting/incoming_docs/add_indoc_popups.js}"></script>
+    <script type="text/javascript" th:src="@{/js/root/accounting/incoming_docs/app_filter_indocs.js}"></script>
+    <script type="text/javascript" th:src="@{/js/root/accounting/incoming_docs/global_filter_popup.js}"></script>
+
+
+
+
+    <script th:inline="javascript">
+        var authData = [[${authData}]];
+        var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    </script>
+
+    <title>Приходные документы</title>
+</head>
+<body>
+
+<div id="main-menu-app">
+</div>
+
+<div id="indocs-app">
+
+    <div class="first_separator">
+        <hr>
+    </div>
+
+
+    <div class="mainContainer">
+        <div id="info_container">
+            <div class="page_title_container">
+                <div class="fa fa-indent"><span class="page_title"> Приходные документы</span></div>
+            </div>
+            <div id="createButtonScope">
+                <form th:action="@{/accounting/add_incoming_doc}">
+                    <input id="create_button" type="submit" value="Новый" />
+                </form>
+            </div>
+            <div id="globalFilterButtonScope">
+                <button id="global_filter_button" @click="showGlobalFilterPopup">Выбрать данные</button>
+            </div>
+        </div>
+
+        <table class="mainTable">
+            <thead class="main_table_thead">
+            <tr class="main_table_tr" is="app-table-header-indocs">
+
+            </tr>
+            <tr class="main_table_tr" is="app-filter-indocs" ></tr>
+            </thead>
+            <tbody class="main_table_tbody" id="tableBody">
+
+            <tr class="main_table_tr" is="app-indocs" :list-of-rows="listOfRows" :table-update-toggle="toggleForUpdate">
+
+            </tr>
+            </tbody>
+            <tfoot class="new-footer">
+            <tr class="main_table_tr">
+                <th class="column_1">Итого: {{countOfRows}}</th>
+                <th class="column_2"></th>
+                <th class="column_3"></th>
+                <th class="column_4"></th>
+                <th class="column_5"></th>
+                <th class="column_6">{{sumOfPositions}}</th>
+
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <create-indoc-popup
+            header_title="Новый приходный документ"
+            button_1_name="Создать"
+            button_2_name="Отмена"
+            v-if="isAddPopupVisible"
+            v-bind:contractors-error-enable="contractorsErrorEnable"
+            @close_add_popup="closeAddPopupWindow"
+            @validate_and_add="validateAndAdd">
+
+        <div class="create_update_form">
+
+
+            <h1 class="form_title">Новый приходный документ</h1>
+            <div class="form_group">
+                <input type="number" v-model="newObject.code" :class="{'input-error-style': codeErrorEnable}" class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Код товара:</label>
+            </div>
+            <div class="form_group">
+                <input type="text" v-model="newObject.name" :class="{'input-error-style': nameErrorEnable}" class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Наименование:</label>
+            </div>
+            <div class="form_group">
+                <app-contractor-for-add :list-of-contractors="listOfContractors" v-bind:contractors-error-enable="contractorsErrorEnable"></app-contractor-for-add>
+                <label class="form_label">Поставщик:</label>
+            </div>
+            <div class="form_group">
+                <app-unit-for-add :list-of-units="listOfUnits" ></app-unit-for-add>
+                <label class="form_label">Единицы измерения:</label>
+            </div>
+            <div class="form_group">
+                <input type="number" v-model="newObject.quantityInSecondaryPackaging" :class="{'input-error-style': pkgErrorEnable}"  class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Кол-во во вторичной уп-ке:</label>
+            </div>
+
+            <div class="checkbox_and_error_info_block">
+                <div class="form_group">
+                    <input class="isactive_input" v-model="newObject.active" type="checkbox" value="true" checked>
+                    <br>
+                    <label class="form_label active_label">Активен:</label>
+                </div>
+                <div class="info_block" >
+                    <p v-if="error_message !== ''">{{error_message}}</p>
+                </div>
+            </div>
+
+        </div>
+    </create-indoc-popup>
+
+
+
+    <global-filter-popup
+            header_title="Выбор данных"
+            button_1_name="OK"
+            button_2_name="Отмена"
+            v-if="isGlobalFilterPopupVisible"
+            @apply_global_filter="applyGlobalFilter"
+            @cancel_popup="hideGlobalFilterWindow"
+           >
+
+
+    </global-filter-popup>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<script type="text/javascript" th:src="@{/js/root/accounting/incoming_docs/incoming_docs.js}"></script>
+
+<script type="text/javascript" th:src="@{/js/root/main/main_menu.js}"></script>
+</body>
+</html>

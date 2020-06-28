@@ -1,0 +1,33 @@
+
+.filter_panel_container {
+    position: absolute;
+    left: 20px;
+}
+.filter_button {
+    font-size: 11px;
+}
+
+.input_filter {
+    width: 95%;
+    height: 12px;
+    outline: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+.menu_title_link {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.filter_cell_td {
+    background-color: #ece9e0;
+    padding: 0;
+}
+
+.input-is-not-empty-style {
+    background-color: rgba(83, 140, 255, 0.42);
+}
+

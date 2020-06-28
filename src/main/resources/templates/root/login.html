@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"
+          xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <link rel="stylesheet"  th:href="@{/css/root/login.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/fontsawesome/css/font-awesome.css}"/>
+    <title>Вход</title>
+</head>
+<body>
+
+<div class='login_block'>
+    <form action="./login/process" method="post">
+        <table>
+            <tr>
+                <td><label>Login: </label></td>
+                <td><label><input type='text' name='login'></label></td>
+            </tr>
+            <tr>
+                <td><label>Password: </label></td>
+                <td><label><input type='password' name='password'></label></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="font-size: 13px; color: red; text-align: center; padding: 0" height="16">
+
+                    <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION]?.message}"></span>
+
+                </td>
+            </tr>
+            <tr>
+                <td height="16"></td>
+                <td><input type='submit' value='Войти'></td>
+                <td><i class="fa fa-calculator fa-lg"></i></td>
+            </tr>
+        </table>
+    </form>
+
+
+
+
+</div>
+
+</body>
+</html>

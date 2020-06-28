@@ -1,0 +1,146 @@
+body {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.mainContainer {
+    margin: auto;
+    min-width: 800px;
+    /*background-color: aquamarine;*/
+}
+
+
+
+#info_container {
+    position: relative;
+    width: 90%;
+    min-width: 1000px;
+    margin: -5px auto 5px;
+    background: #c7c4bb;
+    border-radius: 5px;
+    height: 26px;
+    text-align: center;
+}
+
+.page_title_container {
+    position: relative;
+    top: 4px;
+}
+
+.page_title {
+    font-family: 'san-francisco-bold';
+    font-size: 18px;
+    text-transform: uppercase; /*Все буквы меню заглавные*/
+    -webkit-user-select: none; /*запрет выделения текста*/
+}
+
+#create_button {
+    position: absolute;
+    left: 60px;
+    top: 3px;
+    border-radius: 3px;
+    outline: none;
+}
+
+
+
+a {
+    position: relative;
+}
+
+.documentField {
+    width: 90%;
+    min-width: 1000px;
+    height: 60%;
+    margin: auto;
+    border: 5px groove #c4c1b8;
+    border-radius: 10px;
+    background: #ece9e0;
+
+
+}
+
+.block_1 {
+    display: flex; /*Выстраиваем в ряд*/
+    margin: 8px;
+
+}
+.block_2 {
+    display: flex; /*Выстраиваем в ряд*/
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: -5px;
+}
+
+.block_1_date {
+    /*background-color: #e01d1d;*/
+    width: 13%;
+    font-family: 'san-francisco-heavy';
+    font-size: 14px;
+    text-align: left;
+    letter-spacing: -0.5px;
+    /*line-height: 15px;*/
+
+}
+
+.block_1_date_value {
+    font-family: 'san-francisco-bold';
+    font-size: 12px;
+}
+
+.block_1_title {
+    width: 53%;
+    font-family: 'san-francisco-heavy';
+    letter-spacing: -0.6px;
+    font-size: 17px;
+    text-align: center;
+
+    /*line-height: 20px;*/
+}
+.block_1_title_name{
+    font-family: 'san-francisco-bold';
+    font-size: 15px;
+}
+
+.block_1_indoc_owner {
+    width: 21%;
+    font-family: 'san-francisco-heavy';
+    letter-spacing: -0.5px;
+    font-size: 14px;
+    /*line-height: 15px;*/
+}
+
+.block_1_indoc_owner_name {
+    font-family: 'san-francisco-bold';
+    font-size: 12px;
+}
+
+.block_1_indoc_type {
+    width: 13%;
+    font-family: 'san-francisco-heavy';
+    letter-spacing: -0.5px;
+    font-size: 14px;
+    text-align: left;
+    /*line-height: 15px;*/
+}
+.block_1_indoc_type_name {
+    font-family: 'san-francisco-bold';
+    font-size: 12px;
+}
+
+
+
+
+.block_2 {
+    margin: 10px;
+
+}
+
+
+.block_3 {
+    display: flex; /*Выстраиваем в ряд*/
+    horiz-align: center;
+    margin: 10px;
+    height: 30px;
+
+}

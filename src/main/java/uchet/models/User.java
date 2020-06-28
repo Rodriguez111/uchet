@@ -1,13 +1,15 @@
 package uchet.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Cloneable, CloneableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +28,10 @@ public class User {
     @Column(name = "user_surname", length = 25, nullable = false)
     private String surname;
 
-    @ManyToMany
-    @JoinTable(name = "positions_users",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "position_id")}
-    )
-    private Set<Position> positions = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_position_id", nullable = false)
+    private Position position;
 
     @Column(name = "user_is_active", nullable = false)
     private boolean isActive;
@@ -51,13 +51,20 @@ public class User {
         this.fullName = surname + " " + name;
     }
 
-    public User(String login, String password, String name, String surname, boolean isActive, String createDate) {
+    public User() {
+    }
+
+    public User(String login, String password, String name, String surname, Position position, boolean isActive) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
+        this.position = position;
         this.isActive = isActive;
-        this.createDate = createDate;
+    }
+
+    public User(String login) {
+        this.login = login;
     }
 
     public int getId() {
@@ -100,12 +107,12 @@ public class User {
         this.surname = surname;
     }
 
-    public Set<Position> getPositions() {
-        return positions;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPositions(Set<Position> positions) {
-        this.positions = positions;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public boolean isActive() {
@@ -146,16 +153,27 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return isActive == user.isActive &&
-                Objects.equals(login, user.login) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(surname, user.surname) &&
-                Objects.equals(createDate, user.createDate) &&
-                Objects.equals(lastUpdateDate, user.lastUpdateDate);
+                login.equals(user.login) &&
+                password.equals(user.password) &&
+                name.equals(user.name) &&
+                surname.equals(user.surname) &&
+                position.equals(user.position);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(login, password, name, surname, isActive, createDate, lastUpdateDate);
+        return Objects.hash(login, password, name, surname, position, isActive);
     }
+
+    @Override
+    public User cloneEntity() {
+        User user = null;
+        try {
+            user = (User) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
 }

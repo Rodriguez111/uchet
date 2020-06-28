@@ -1,0 +1,114 @@
+.menu_container *{ /*сбрасываем отступы, которые могут создавать разные браузеры*/
+    margin: 0;
+    padding: 0;
+    font-family: Cuprum;
+    z-index: 1;
+    -webkit-user-select: none; /*запрет выделения текста*/
+}
+
+
+.header_strip {
+    margin-top: -10px;
+    margin-bottom: -3px;
+    background: #97948b; /*Цвет фона*/
+    height: 38px;
+    min-width: 1000px;
+}
+
+.menu_container ul, .menu_container ol {
+    list-style: none; /*скрываем маркеры списка*/
+}
+
+.menu_container > ul {
+    display: flex; /*Выстраиваем в ряд*/
+    justify-content: center;  /*Размещаем по центру*/
+}
+.menu_a{ /*Выбираем все ссылки*/
+    display: block;
+    background: #c4c1b8; /*Цвет фона*/
+    padding: 10px 10px 10px 10px;
+    font-size: 16px;
+    color: black; /*Цвет шрифта*/
+    text-decoration: none; /*Убираем подчеркивание ссылок*/
+    text-transform: uppercase; /*Все буквы меню заглавные*/
+    transition: all 0.3s ease; /*Задаем плавное появление*/
+}
+
+.menu_container > ul li {
+    position: relative;
+    border-left: 1px solid #9d9d9d; /*Контуры списка меню*/
+
+}
+
+
+.menu_container > ul li:first-child { /*Выбираем левый пункт меню*/
+border-left: 1px solid  #9d9d9d; /*Левый контур списка меню*/
+}
+
+.menu_container > ul li:last-child{ /*Выбираем последний пункт меню*/
+    border-right: 1px solid  #9d9d9d; /*Правый контур списка меню*/
+}
+
+.menu_container li a:hover { /*Выбираем ссылки при наведении*/
+    background: #615e55; /*Меняем цвет фона на темный при наведении*/
+    color: white; /*Меняем цвет шрифта на белый при наведении*/
+    box-shadow: 1px 5px 10px -5px black; /*Задаем тень при наведении*/
+    transition: all 0.3s ease; /*Задаем плавное появление*/
+}
+
+
+
+/*Sub-menu*/
+
+.menu_container li ul { /*Выбираем списки подменю*/
+   position: absolute;
+    min-width: 180px;
+    display: none; /*Не показывать пункты подменю*/
+}
+
+.menu_container li ul li {
+  border: 1px solid #9d9d9d; /*Окантовка блоков подменю*/
+}
+
+.menu_container li > ul li a { /*Выбираем все ССЫЛКИ подменю*/
+    padding: 5px;
+    text-transform: none; /*Убираем трансформацию, (вверху делали все буквы заглавные)*/
+    background: #dedbd2; /*Цвет фона подменю*/
+
+}
+
+.menu_container li:hover > ul { /*Выбираем все списки подменю при наведении на пункт верхнего меню*/
+    display: block; /*Показывать пункты подменю*/
+}
+
+
+.not_clickable {
+
+    pointer-events: none;
+
+    display: block;
+    background: #c4c1b8; /*Цвет фона*/
+    padding: 10px 10px 10px 10px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.37); /*Цвет шрифта*/
+    text-decoration: none; /*Убираем подчеркивание ссылок*/
+    text-transform: uppercase; /*Все буквы меню заглавные*/
+    transition: all 0.3s ease; /*Задаем плавное появление*/
+
+}
+
+
+#authInfoUserBlock{
+    padding: 4px;
+    font-size: 12px;
+    letter-spacing: -0.5px;
+    text-transform: none;
+    font-weight: bold;
+    height: 78%;
+}
+
+
+
+
+
+

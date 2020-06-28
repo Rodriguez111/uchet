@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<meta http-equiv="Cache-Control" content="no-cache" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/basic_styles/main_menu.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/root/accounting/incoming_docs/view_page.css}"/>
+    <link rel="stylesheet" th:href="@{/css/root/accounting/incoming_docs/view_details_table.css}"/>
+    <link rel="stylesheet" th:href="@{/css/root/accounting/incoming_docs/view_columns.css}"/>
+
+
+
+    <link rel="stylesheet" th:href="@{/fonts/fontsawesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/materialicons/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/cuprum/cuprum.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/san_francisco/san_francisco_font.css}"/>
+
+
+    <script type="text/javascript" th:src="@{/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vue-resource.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lodash_full.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vue-clickaway.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/moment.min.js}"></script>
+
+
+
+
+
+
+
+    <script th:inline="javascript">
+        var authData = [[${authData}]];
+        var inDoc = [[${inDoc}]];
+        var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    </script>
+
+    <title>Детали приходного документа</title>
+
+</head>
+<body>
+
+<div id="main-menu-app">
+
+</div>
+
+
+
+
+<div id="incoming-doc-details-app">
+
+
+    <div class="first_separator">
+        <hr>
+    </div>
+
+
+    <div class="mainContainer">
+        <div id="info_container">
+            <div class="page_title_container">
+                <div ><span class="page_title"> Детали приходной накладной</span></div>
+            </div>
+            <div id="createButtonScope">
+                <form th:action="@{/accounting/incoming_docs}">
+                    <input id="create_button" type="submit" value="Назад" />
+                </form>
+            </div>
+        </div>
+
+
+        <div class="documentField">
+
+
+            <div class="block_1">
+                <div class="block_1_date">
+                    Дата документа:<br>
+                    <span class="block_1_date_value">{{documentDate}}</span>
+                </div>
+
+                <div class="block_1_title">
+                    Детали приходного документа № {{documentNumber}}<br>
+                    <span class="block_1_title_name"> {{documentContractorName}}</span>
+                </div>
+                <div class="block_1_indoc_owner">
+                    Принял: <br>
+                    <span class="block_1_indoc_owner_name"> {{documentOwner}}</span>
+                </div>
+                <div class="block_1_indoc_type">
+                    Тип документа: <br>
+                    <span class="block_1_indoc_type_name"> {{documentType}}</span>
+                </div>
+            </div>
+
+
+            <div class="block_2">
+
+
+                <table class="detailsTable">
+                    <thead class="details_table_thead">
+                    <tr class="details_table_tr">
+                        <th class="column_1">№</th>
+                        <th class="column_2">Код</th>
+                        <th class="column_3">Название</th>
+                        <th class="column_4">Серия</th>
+                        <th class="column_5">Срок годности</th>
+                        <th class="column_6">Кол-во</th>
+                        <th class="column_7">Ед. изм</th>
+                        <th class="column_8">Цена</th>
+                        <th class="column_9">Цена с НДС</th>
+                        <th class="column_10">Сумма</th>
+                        <th class="column_11">Сумма с НДС</th>
+                    </tr>
+
+                    </thead>
+                    <tbody class="details_table_tbody" >
+
+                    <tr class="details_table_tr" is="details-list">
+                    </tr>
+
+
+
+                    </tbody>
+                    <tfoot class="details_table_footer">
+                    <tr class="details_table_tr">
+                        <th class="column_1">Итого: {{detailsAmount}} </th>
+                        <th class="column_2"></th>
+                        <th class="column_3"></th>
+                        <th class="column_4"></th>
+                        <th class="column_5"></th>
+                        <th class="column_6">{{qtySum}}</th>
+                        <th class="column_7"></th>
+                        <th class="column_8">{{priceSum}}</th>
+                        <th class="column_9">{{vatPriceSum}}</th>
+                        <th class="column_10">{{totalSum}}</th>
+                        <th class="column_11">{{vatTotalSum}}</th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+            <hr/>
+            <div class="block_3">
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<script type="text/javascript" th:src="@{/js/root/main/main_menu.js}"></script>
+<script type="text/javascript" th:src="@{/js/root/accounting/incoming_docs/incoming_doc.js}"></script>
+
+</body>
+</html>

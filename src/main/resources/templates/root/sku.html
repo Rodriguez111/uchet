@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<meta http-equiv="Cache-Control" content="no-cache" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      >
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/basic_styles/main_menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/basic_page_style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/filter_panel.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/create_update_popup.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/create_update_form.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/delete_popup.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/root/sku_columns.css}"/>
+
+    <link rel="stylesheet" th:href="@{/fonts/fontsawesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/materialicons/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/cuprum/cuprum.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/san_francisco/san_francisco_font.css}"/>
+
+    <script type="text/javascript" th:src="@{/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vue-resource.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lodash_full.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/root/sku/app_table_header_sku.js}"></script>
+    <script type="text/javascript" th:src="@{/js/root/sku/sku_popups.js}"></script>
+    <script type="text/javascript" th:src="@{/js/root/sku/app_filter_sku.js}"></script>
+
+    <script th:inline="javascript">
+        var authData = [[${authData}]];
+        var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    </script>
+
+
+
+
+    <title>Товары</title>
+</head>
+<body>
+
+
+<div id="main-menu-app">
+
+</div>
+
+
+    <div id="sku-app">
+
+    <div class="first_separator">
+        <hr>
+    </div>
+
+
+    <div class="mainContainer">
+        <div id="info_container">
+            <div class="page_title_container">
+                <div class="fa fa-shopping-basket"><span class="page_title"> Товары</span></div>
+            </div>
+            <div id="createButtonScope">
+                <button id="create_button" @click="showAddPopup">Новый</button>
+            </div>
+        </div>
+
+        <table class="mainTable">
+            <thead class="main_table_thead">
+            <tr class="main_table_tr" is="app-table-header-sku">
+
+            </tr>
+            <tr class="main_table_tr" is="app-filter-sku" ></tr>
+            </thead>
+            <tbody class="main_table_tbody" id="tableBody">
+
+            <tr class="main_table_tr" is="app-sku" :list-of-sku="listOfSku" :table-update-toggle="toggleForUpdate">
+            </tr>
+            </tbody>
+            <tfoot class="new-footer">
+            <tr class="main_table_tr">
+                <th class="column_1">Итого: {{countOfRows}}</th>
+                <th class="column_2"></th>
+                <th class="column_3"></th>
+                <th class="column_4"></th>
+                <th class="column_5">{{sumOfPkg}}</th>
+                <th class="column_6"></th>
+                <th class="column_7"></th>
+                <th class="column_8"></th>
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+
+
+
+
+    <create-sku-popup
+            header_title="Новая карточка товара"
+            button_1_name="Создать"
+            button_2_name="Отмена"
+            v-if="isAddPopupVisible"
+            v-bind:contractors-error-enable="contractorsErrorEnable"
+            @close_add_popup="closeAddPopupWindow"
+            @validate_and_add="validateAndAdd">
+
+        <div class="create_update_form">
+
+
+            <h1 class="form_title">Новая карточка товара</h1>
+<!--            <div class="form_group">-->
+<!--                <input type="number" v-model="newObject.code" :class="{'input-error-style': codeErrorEnable}" class="form_input" placeholder=" ">-->
+<!--                <br>-->
+<!--                <label class="form_label">Код товара:</label>-->
+<!--            </div>-->
+            <div class="form_group">
+                <input type="text" v-model="newObject.name" :class="{'input-error-style': nameErrorEnable}" class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Наименование:</label>
+            </div>
+            <div class="form_group">
+                <app-contractor-for-add :list-of-contractors="listOfContractors" v-bind:contractors-error-enable="contractorsErrorEnable"></app-contractor-for-add>
+                <label class="form_label">Поставщик:</label>
+            </div>
+            <div class="form_group">
+                <app-unit-for-add :list-of-units="listOfUnits" ></app-unit-for-add>
+                <label class="form_label">Единицы измерения:</label>
+            </div>
+            <div class="form_group">
+                <input type="number" v-model="newObject.quantityInSecondaryPackaging" :class="{'input-error-style': pkgErrorEnable}"  class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Кол-во во вторичной уп-ке:</label>
+            </div>
+
+            <div class="checkbox_and_error_info_block">
+                <div class="form_group">
+                    <input class="isactive_input" v-model="newObject.active" type="checkbox" value="true" checked>
+                    <br>
+                    <label class="form_label active_label">Активен:</label>
+                </div>
+                <div class="info_block" >
+                    <p v-if="error_message !== ''">{{error_message}}</p>
+                </div>
+            </div>
+
+        </div>
+    </create-sku-popup>
+
+    <update-sku-popup
+            header_title="Обновление карточки товара"
+            button_1_name="Изменить"
+            button_2_name="Отмена"
+            v-if="isUpdatePopupVisible"
+            @close_update_popup="closeUpdatePopupWindow"
+            @validate_and_update="validateAndUpdate">
+
+        <div class="create_update_form">
+
+            <h1 class="form_title">Изменение карточки товара</h1>
+<!--            <div class="form_group">-->
+<!--                <input type="number" v-model="newObject.code" :class="{'input-error-style': codeErrorEnable}" class="form_input" placeholder=" ">-->
+<!--                <br>-->
+<!--                <label class="form_label">Код товара:</label>-->
+<!--            </div>-->
+            <div class="form_group">
+                <input type="text" v-model="newObject.name" :class="{'input-error-style': nameErrorEnable}" class="form_input" placeholder=" ">
+                <br>
+                <label class="form_label">Наименование:</label>
+            </div>
+            <div class="form_group">
+                <app-contractor-for-update :list-of-contractors="listOfContractors" :selected-contractor-name="newObject.contractor.name"></app-contractor-for-update>
+                <label class="form_label">Поставщик:</label>
+            </div>
+            <div class="form_group">
+                <app-unit-for-update :list-of-units="listOfUnits" :selected-unit="newObject.unit.unit" ></app-unit-for-update>
+                <label class="form_label">Единицы измерения:</label>
+            </div>
+            <div class="form_group">
+                <input type="number" v-model="newObject.quantityInSecondaryPackaging" class="form_input" placeholder=" ">
+                <label class="form_label">Кол-во во вторичной уп-ке:</label>
+            </div>
+
+            <div class="checkbox_and_error_info_block">
+                <div class="form_group">
+                    <input class="isactive_input" v-model="newObject.active" type="checkbox" value="true" checked>
+                    <br>
+                    <label class="form_label active_label">Активен:</label>
+                </div>
+                <div class="info_block" >
+                    <p v-if="error_message !== ''">{{error_message}}</p>
+                </div>
+            </div>
+
+        </div>
+    </update-sku-popup>
+
+    <delete-sku-popup header_title="Удаление карточки товара"
+                       button_1_name="Удалить"
+                       button_2_name="Отмена"
+                      :sku_to_delete="newObject"
+                      :error_message="error_message"
+                       v-if="isDeletePopupVisible"
+                       @close_delete_popup="closeDeletePopupWindow"
+                       @validate_and_delete="sendDataForDelete">
+
+    </delete-sku-popup>
+
+
+
+
+</div>
+
+
+<script type="text/javascript" th:src="@{js/root/main/main_menu.js}"></script>
+<script type="text/javascript" th:src="@{/js/root/sku/sku.js}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-model="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/basic_styles/main_menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/basic_page_style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/filter_panel.css}"/>
+
+
+    <link rel="stylesheet" th:href="@{/fonts/fontsawesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/cuprum/cuprum.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/san_francisco/san_francisco_font.css}"/>
+
+
+    <script type="text/javascript" th:src="@{/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vue-resource.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lodash_full.js}"></script>
+
+
+
+
+    <script th:inline="javascript">
+        var authData = [[${authData}]];
+        var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    </script>
+
+
+
+    <title>Главная страница</title>
+</head>
+<body>
+
+<div id="main-menu-app">
+
+
+</div>
+
+<div id="main-app">
+<div class="first_separator">
+    <hr>
+</div>
+
+<h1>Главная страница программы</h1>
+
+
+
+
+
+</div>
+
+<script type="text/javascript" th:src="@{js/root/main/main.js}"></script>
+<script type="text/javascript" th:src="@{js/root/main/main_menu.js}"></script>
+</body>
+</html>

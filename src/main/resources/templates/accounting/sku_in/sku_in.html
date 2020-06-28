@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<meta http-equiv="Cache-Control" content="no-cache" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/css/basic_styles/main_menu.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/basic_styles/filter_panel.css}"/>
+
+
+    <link rel="stylesheet" th:href="@{/css/root/accounting/sku_in/sku_in_columns.css}"/>
+    <link rel="stylesheet" th:href="@{/css/root/accounting/sku_in/sku_in_table.css}"/>
+
+    <link rel="stylesheet" th:href="@{/fonts/fontsawesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/materialicons/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/cuprum/cuprum.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/san_francisco/san_francisco_font.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/oswald/oswald.css}"/>
+
+
+    <script type="text/javascript" th:src="@{/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vue-resource.min.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/root/accounting/sku_in/app_table_header_sku_in.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/root/accounting/sku_in/app_filter_sku_in.js}"></script>
+
+    <script th:inline="javascript">
+        var authData = [[${authData}]];
+        var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
+    </script>
+
+    <title>Приход товаров</title>
+</head>
+<body>
+
+<div id="main-menu-app">
+</div>
+
+<div id="skuin-app">
+
+    <div class="first_separator">
+        <hr>
+    </div>
+
+
+    <div class="mainContainer">
+        <div id="info_container">
+            <div class="page_title_container">
+                <div class="fa fa-indent"><span class="page_title"> Приход товаров</span></div>
+            </div>
+        </div>
+
+
+
+        <div class="table_container">
+
+            <div class="table_header_div">
+
+                <table class="table_header">
+
+
+
+                        <tr class="main_table_tr" is="app-table-header-skuin">
+                        </tr>
+
+                    <tr class="main_table_tr" is="app-filter-skuin">
+                    </tr>
+
+
+
+                </table>
+            </div>
+
+
+            <div class="table_body_div">
+                <table class="table_body">
+                    <tbody is="app-skuins" :list-of-rows="listOfRows"></tbody>
+                </table>
+            </div>
+
+            <div class="table_footer_div">
+
+                <table class="table_footer">
+                    <tr>
+                        <td class="footer_td column_1"></td>
+                        <td class="footer_td column_2"></td>
+                        <td class="footer_td column_3"></td>
+                        <td class="footer_td column_4">Итого: 99999</td>
+                        <td class="footer_td column_5"></td>
+                        <td class="footer_td column_6"></td>
+                        <td class="footer_td column_7">99999</td>
+                        <td class="footer_td column_8"></td>
+                        <td class="footer_td column_9">9999999</td>
+                        <td class="footer_td column_10">99999999</td>
+                        <td class="footer_td column_11">99999999</td>
+                        <td class="footer_td column_12">99999999</td>
+                        <td class="footer_td column_13"></td>
+                        <td class="footer_td column_14"></td>
+                        <td class="footer_td column_15"></td>
+                        <td class="footer_td column_16"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+</div>
+
+<script type="text/javascript" th:src="@{/js/root/accounting/sku_in/sku_in.js}"></script>
+<script type="text/javascript" th:src="@{/js/root/main/main_menu.js}"></script>
+</body>
+</html>

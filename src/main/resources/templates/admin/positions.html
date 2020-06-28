@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/basic_styles/main_menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/basic_page_style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/filter_panel.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/create_update_popup.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/create_update_form.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/delete_popup.css}"/>
+    <link rel="stylesheet" th:href="@{/css/basic_styles/popup/checkbox_panel.css}"/>
+
+
+    <link rel="stylesheet" th:href="@{/css/root/positions_columns.css}"/>
+
+    <link rel="stylesheet" th:href="@{/fonts/fontsawesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/materialicons/material-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/cuprum/cuprum.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/san_francisco/san_francisco_font.css}"/>
+
+    <script type="text/javascript" th:src="@{/js/vue.js}"></script>
+    <script type="text/javascript" th:src="@{/js/vue-resource.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lodash_full.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/admin/positions/app_table_header_positions.js}"></script>
+    <script type="text/javascript" th:src="@{/js/admin/positions/position_popups.js}"></script>
+    <script type="text/javascript" th:src="@{/js/admin/positions/app_filter_positions.js}"></script>
+
+    <script th:inline="javascript">
+        var authData = [[${authData}]];
+        var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    </script>
+
+    <title>Должности</title>
+</head>
+<body>
+
+
+<div id="main-menu-app">
+
+</div>
+
+
+
+<div id="positions-app">
+
+    <div class="first_separator">
+        <hr>
+    </div>
+
+
+    <div class="mainContainer">
+        <div id="info_container" style="width: 60%">
+            <div class="page_title_container">
+                <div class="fa fa-hand-o-right"><span class="page_title"> Должности</span></div>
+            </div>
+            <div id="createButtonScope">
+                <button id="create_button" @click="showAddPopup">Новый</button>
+            </div>
+        </div>
+
+        <table class="mainTable" style="width: 60%">
+            <thead class="main_table_thead">
+            <tr class="main_table_tr" is="app-table-header-positions">
+            </tr>
+            <tr class="main_table_tr" is="app-filter-positions"></tr>
+            </thead>
+            <tbody class="main_table_tbody" id="tableBody">
+            <tr class="main_table_tr" is="app-positions" :table-update-toggle="toggleForUpdate"
+                :list-of-positions="listOfPositions">
+            </tr>
+            </tbody>
+            <tfoot class="new-footer">
+            <tr class="main_table_tr">
+                <th class="column_1">Итого: {{countOfRows}}</th>
+                <th class="column_2"></th>
+                <th class="column_3"></th>
+                <th class="column_4"></th>
+                <th class="column_5"></th>
+                <th class="column_6"></th>
+                <th class="column_7"></th>
+                <th class="column_8"></th>
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+
+
+    <create-position-popup
+            header_title="Создание новой должности"
+            button_1_name="Создать"
+            button_2_name="Отмена"
+            v-if="isAddPopupVisible"
+            @close_add_popup="closeAddPopupWindow"
+            @validate_and_add="validateAndAdd">
+
+        <div class="create_update_form">
+            <h1 class="form_title">Новая должность</h1>
+            <div class="form_group">
+                <input type="text" v-model="newObject.position"
+                       :class="{'input-error-style': positionErrorEnable}" class="form_input"
+                       placeholder=" ">
+                <br>
+                <label class="form_label">Должность:</label>
+            </div>
+            <div class="form_group">
+                <input type="text" v-model="newObject.positionDescription"
+                       :class="{'input-error-style': descriptionErrorEnable}" class="form_input"
+                       placeholder=" ">
+                <br>
+                <label class="form_label">Описание должности:</label>
+            </div>
+
+            <checkbox-panel-component></checkbox-panel-component>
+
+            <div class="checkbox_and_error_info_block">
+                <div class="info_block">
+                    {{error_message}}
+                </div>
+            </div>
+
+        </div>
+
+    </create-position-popup>
+
+
+    <update-position-popup header_title="Изменение должности"
+                           button_1_name="Изменить"
+                           button_2_name="Отмена"
+                           v-if="isUpdatePopupVisible"
+                           @close_update_popup="closeUpdatePopupWindow"
+                           @validate_and_update="validateAndUpdate">
+        <div class="create_update_form">
+            <h1 class="form_title">Изменение должности</h1>
+            <div class="form_group">
+                <input type="text" v-model="newObject.position"
+                       :class="{'input-error-style': positionErrorEnable}" class="form_input"
+                       placeholder=" ">
+                <br>
+                <label class="form_label">Должность:</label>
+            </div>
+            <div class="form_group">
+                <input type="text" v-model="newObject.positionDescription"
+                       :class="{'input-error-style': descriptionErrorEnable}" class="form_input"
+                       placeholder=" ">
+                <br>
+                <label class="form_label">Описание должности:</label>
+            </div>
+
+            <checkbox-panel-component></checkbox-panel-component>
+
+            <div class="checkbox_and_error_info_block">
+                <div class="info_block">
+                    {{error_message}}
+                </div>
+            </div>
+
+        </div>
+    </update-position-popup>
+
+
+    <delete-position-popup header_title="Удаление должности"
+                           button_1_name="Удалить"
+                           button_2_name="Отмена"
+                           :position_to_delete="newObject"
+                           :error_message="error_message"
+                           v-if="isDeletePopupVisible"
+                           @close_delete_popup="closeDeletePopupWindow"
+                           @validate_and_delete="sendDataForDelete">
+    </delete-position-popup>
+
+
+</div>
+
+<script type="text/javascript" th:src="@{/js/admin/positions/positions.js}"></script>
+<script type="text/javascript" th:src="@{/js/root/main/main_menu.js}"></script>
+
+</body>
+</html>

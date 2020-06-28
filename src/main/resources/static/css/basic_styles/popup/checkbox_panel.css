@@ -1,0 +1,71 @@
+.checkbox_panel_title {
+    margin-top: -5px;
+}
+
+.checkbox_panel {
+    /*background-color: #42b983;*/
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.four-col-grid {
+    margin-top: 30px;
+}
+
+.four-col-grid .grid-item {
+    width: 25%;
+    float: left;
+}
+
+/*если использовать float, то внешний контейнер схлопывается, исправим это вот так:*/
+.four-col-grid::after {
+    display: table;
+    clear: both;
+    content: '';
+}
+
+.checkbox_panel_tabs {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #ECE9E0;
+    border-radius: 5px;
+
+}
+
+/* Style the buttons inside the tab */
+.checkbox_panel_tab {
+    background-color: #d6d3ca;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    transition: 0.3s;
+    font-size: 15px;
+
+}
+
+/* Change background color of buttons on hover */
+.checkbox_panel_tab:hover {
+    background-color: #b4b1a8;
+}
+
+/* Create an active/current tablink class */
+.checkbox_panel_tab:active {
+    background-color: #99968d;
+}
+
+.checkbox_panel_tab_active {
+    background-color: #99968d;
+}
+
+/* Style the tab content */
+.checkbox_panel_tabcontent {
+    display: block;
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-top: none;
+
+    letter-spacing: -0.2px;
+}
